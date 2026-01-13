@@ -4,3 +4,9 @@ C:\Users\DELL\Desktop\code\Course 19\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.c
 C:\Users\DELL\Desktop\code\Course 19\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\DELL\Desktop\code\Course 19\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.dll
 C:\Users\DELL\Desktop\code\Course 19\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.AssemblyReference.cache
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.dll
+C:\Users\DELL\Desktop\code\Course 19\DVLD Project\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
