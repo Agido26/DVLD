@@ -61,19 +61,7 @@ namespace DVLD_Business
             File.WriteAllText(FilePath, Text);
         }
 
-        public static string[] split(string Text,string Sepratore)
-        {
-            string[] Words = Text.Split();
-            return Words;
-
-
-        }
-
-        public static string DateNow()
-        {
-            DateTime now = DateTime.Now;
-            return now.ToString("dd/mm/yyyy");
-        }
+      
 
     }
 }
