@@ -131,7 +131,7 @@
             // 
             this.ctrlApplicationInfo1.Location = new System.Drawing.Point(3, 92);
             this.ctrlApplicationInfo1.Name = "ctrlApplicationInfo1";
-            this.ctrlApplicationInfo1.Size = new System.Drawing.Size(428, 184);
+            this.ctrlApplicationInfo1.Size = new System.Drawing.Size(532, 184);
             this.ctrlApplicationInfo1.TabIndex = 0;
             // 
             // ctrlLocalLicenseInfo

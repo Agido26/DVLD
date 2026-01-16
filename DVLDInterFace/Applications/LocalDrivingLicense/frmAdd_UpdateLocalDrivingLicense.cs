@@ -128,34 +128,34 @@ namespace DVLD.LocalDrivingLicense
         {
             //is the person have new application
             int AppID = clsApplication.GetActiveApplicationIDForLicenseClass(ctrlCardInfoWithFilter1.PersonID, (int)cbLinceseClasses.SelectedValue, 1);
-            if (AppID!=-1)
+            if (AppID != -1)
             {
                 MessageBox.Show($"This Person Has open Application with ID{AppID}");
                 return;
             }
-             if(clsLicenses.IsLicenseExistByPersonID(ctrlCardInfoWithFilter1.PersonID, (int)cbLinceseClasses.SelectedValue))
+            if (clsLicenses.IsLicenseExistByPersonID(ctrlCardInfoWithFilter1.PersonID, (int)cbLinceseClasses.SelectedValue))
             {
                 MessageBox.Show($"This Person already Has License ");
                 return;
             }
-             _LocalDrivingApplication.PersonID = ctrlCardInfoWithFilter1.PersonID;
+            _LocalDrivingApplication.PersonID = ctrlCardInfoWithFilter1.PersonID;
             _LocalDrivingApplication.ApplicationDate = DateTime.Now;
             _LocalDrivingApplication.ApplicationTypeID = 1;//New Local Driving Lincese
             _LocalDrivingApplication.ApplicationStatus = clsApplication.enStatus.enNew;
-            _LocalDrivingApplication.LastStatusDate= DateTime.Now;
+            _LocalDrivingApplication.LastStatusDate = DateTime.Now;
             _LocalDrivingApplication.PaidFees = clsApplicationType.Find(1).Fees;
-            _LocalDrivingApplication.UserID=clsGlobal.CurrentUser.UserID;
+            _LocalDrivingApplication.UserID = clsGlobal.CurrentUser.UserID;
             _LocalDrivingApplication.LicenseClassID = (int)cbLinceseClasses.SelectedValue;
             if (_LocalDrivingApplication.Save())
             {
 
-                lblID.Text = _LocalDrivingApplication.LocalDrivingLicenseID.ToString();              
+                lblID.Text = _LocalDrivingApplication.LocalDrivingLicenseID.ToString();
                 Mode = enMode.Update;
                 lblMain.Text = "Update Local Driving License Application";
                 MessageBox.Show("Done!");
             }
-            else {MessageBox.Show("Something went wrong"); return; }
-          
+            else { MessageBox.Show("Something went wrong"); return; }
+
         }
     }
 }

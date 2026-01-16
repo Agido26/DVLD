@@ -37,7 +37,8 @@ namespace DVLD.Tests
             {
                 Test = new clsTests();
                 Test.TestAppointmentID = TestAppointmentID;
-                Test.TestResult = rdPass.Checked;
+                
+                Test.TestResult = rdPass.Checked;//return true if he pass or false if failed
                 Test.Notes = txtNote.Text;
                 Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 if (Test.Save())
@@ -83,7 +84,7 @@ namespace DVLD.Tests
             lblDLAppID.Text = TestAppointment.LocalDrivingLicenseID.ToString();
             lblDClass.Text = TestAppointment.LocalDrivingLicense.FullName;
             lblName.Text = TestAppointment.LocalDrivingLicense.FullName;
-            lblTrail.Text = TestAppointment.CountTrails().ToString();
+           
             lblDate.Text = TestAppointment.AppointmentDate.ToString();
             lblFees.Text = TestAppointment.PaidFees.ToString();
 

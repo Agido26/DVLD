@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,6 +58,17 @@ namespace DVLD_Business
         {
             return clsLocalDrivingLicenseData.GetAllLocalDrivingLicense();
         }
+        public static clsLocalDrivingLicenseApplication FindByApplicationID(int ApplicationID)
+        {
+            int LocalApplicationID = -1, LicenseID = -1;
+            bool isfind = clsLocalDrivingLicenseData.FindByApplicationID(ApplicationID, ref LocalApplicationID, ref LicenseID);
+            if (isfind)
+            {
+                clsApplication App = clsApplication.FindApplicationByID(LocalApplicationID);
+                return new clsLocalDrivingLicenseApplication(LocalApplicationID, LicenseID, ApplicationID, App.PersonID, App.UserID, App.ApplicationStatus, App.LastStatusDate, App.ApplicationDate, App.PaidFees, App.ApplicationTypeID);
+            }
+            return null;
+        }
 
         public static clsLocalDrivingLicenseApplication FindByLocalLicenseID(int Id)
         {
@@ -77,18 +89,7 @@ namespace DVLD_Business
             return clsLocalDrivingLicenseData.DeleteByLocalDrivingLicenseApplicationID(LocalApplicationID);
         }
 
-        public static clsLocalDrivingLicenseApplication FindByApplicationID(int ApplicationID)
-        {
-            int LocalApplicationID = -1, LicenseID = -1;
-            bool isfind = clsLocalDrivingLicenseData.FindByApplicationID(ApplicationID, ref LocalApplicationID, ref LicenseID);
-            if (isfind)
-            {
-                clsApplication App = clsApplication.FindApplicationByID(LocalApplicationID);
-                return new clsLocalDrivingLicenseApplication(LocalApplicationID, LicenseID, ApplicationID, App.PersonID, App.UserID, App.ApplicationStatus, App.LastStatusDate, App.ApplicationDate, App.PaidFees, App.ApplicationTypeID);
-            }
-            return null;
-        }
-
+      
         private bool _AddNewLocalDrivingLicenseApplication()
         {
             this.LocalDrivingLicenseID = clsLocalDrivingLicenseData.AddNewLocalDrivingLicenseApplication(this.LicenseClassID, this.ApplicationID);
@@ -140,6 +141,41 @@ namespace DVLD_Business
             int LicID = clsLicensesData.GetActiveLicenseID(ApplicationID, LicenseClassID);
             return LicID;
         }
+        public static bool IsThereActiveTestAppointment(int LicneseID,int TestTypeID)
+        {
+           return clsLocalDrivingLicenseData.IsThereAnActiveScheduledTest(LicneseID, TestTypeID);
+        }
+        public bool IsThereActiveTestAppointment( int TestTypeID)
+        {
+            return clsLocalDrivingLicenseData.IsThereAnActiveScheduledTest(this.LocalDrivingLicenseID, TestTypeID);
+        }
 
+        public  int TotalTrailsPerTest( int TestTypeID)
+        { return clsLocalDrivingLicenseData.TotalTrailPerTest(this.LocalDrivingLicenseID, TestTypeID); }
+
+        public static int TotalTrailsPerTest(int LicneseID, int TestTypeID)
+        { return clsLocalDrivingLicenseData.TotalTrailPerTest(LicneseID, TestTypeID); }
+
+        public bool DoesPassTestType(int TestTypeID)
+        {
+            return clsLocalDrivingLicenseData.DoesPassTestType(this.LocalDrivingLicenseID, TestTypeID);
+        }
+        public bool DoesPassTestType(int LocalLinceseID,int TestTypeID)
+        {
+            return clsLocalDrivingLicenseData.TotalTrailPerTest(LocalLinceseID, (int)TestTypeID) > 0;
+        }
+        public bool DoesAttendTestType(int LocalLinceseID, clsTestTypes.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseData.TotalTrailPerTest(LocalLinceseID,(int)TestTypeID)>0;
+        }
+        public bool DoesAttendTestType(clsTestTypes.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseData.DoesAttendTestType(this.LocalDrivingLicenseID, (int)TestTypeID);
+        }
+        public clsTests GetLastTestPerTestType(clsTestTypes.enTestType testType)
+        {
+            return clsTests.GetLastTestByAppIDAndLicenseClassID(this.ApplicationID, this.LicenseClassID, testType);
+        }
+    
     }
 }

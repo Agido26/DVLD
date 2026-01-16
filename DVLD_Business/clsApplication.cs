@@ -13,7 +13,14 @@ namespace DVLD_Business
        public enum enMode {New=1, Update=2}
      public   enMode Mode;
         public enum enStatus { enNew=1,enCancelled=2,enCompleted=3}
-       
+        public enum enApplicationType
+        {
+            NewLocalDrivingLicense = 1, RenewLocalLicense = 2,
+            ReplacementForLost = 3, ReplacementForDamged = 4,
+            ReleaseDetained = 5, InternationalLicense = 6, RetakeTest = 7
+        }
+
+
         public int ApplicationID { get; set; }
         public int PersonID {  get; set; }
         public clsPeople Person{ get; set; }

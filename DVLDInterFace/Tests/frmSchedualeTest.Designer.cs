@@ -28,47 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.ctrlScheduleTets1 = new DVLD.Tests.Controls.ctrlScheduleTets();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // ctrlScheduleTets1
             // 
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Location = new System.Drawing.Point(22, 19);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(443, 539);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.ctrlScheduleTets1.Location = new System.Drawing.Point(12, 12);
+            this.ctrlScheduleTets1.Name = "ctrlScheduleTets1";
+            this.ctrlScheduleTets1.Size = new System.Drawing.Size(413, 576);
+            this.ctrlScheduleTets1.TabIndex = 0;
             // 
-            // pictureBox1
+            // btnClose
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(128, 36);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 115);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.btnClose.Location = new System.Drawing.Point(120, 594);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(89, 29);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // SchedualeTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 580);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(420, 628);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.ctrlScheduleTets1);
             this.Name = "SchedualeTest";
             this.Text = "SchedualeTest";
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.SchedualeTest_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private Controls.ctrlScheduleTets ctrlScheduleTets1;
+        private System.Windows.Forms.Button btnClose;
     }
 }

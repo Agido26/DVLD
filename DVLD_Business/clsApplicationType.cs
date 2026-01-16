@@ -24,7 +24,7 @@ namespace DVLD_Business
         {
             this.ID = enApplicationType.NewLocalDrivingLicense;
             this.Title = "";
-            this.Fees = -1;
+            this.Fees = 0;
 
         }
         public clsApplicationType(int ID, string Title, decimal fees)

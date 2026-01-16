@@ -18,7 +18,7 @@ namespace DVLD_DataAccess
             DataTable TestAppointments = new DataTable();
 
             SqlConnection conn = new SqlConnection("Server=.;DataBase=DVLD; User Id=sa;Password=123456");
-            string Query = @"Select * from TestAppointments";
+            string Query = @"Select * from TestAppointments_View";
             SqlCommand cmd = new SqlCommand(Query, conn);
             try
             {
@@ -74,6 +74,45 @@ namespace DVLD_DataAccess
             return IsFind;
         }
 
+        public static bool GetLastTestAppointment(int LocalDrivingLicenseApplicationID , int TestTypeID, ref int TestAppointmentID, ref DateTime AppointmentDate, ref decimal PaidFees, ref int CreatedByUserID, ref bool IsLocked, ref int RetakeTestApplicationID)
+
+        {
+            bool IsFind = false;
+
+            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
+            string Query = @"select top 1 * from TestAppointments
+                             where TestTypeID=@TestTypeID and LocalDrivingLicenseApplicationID=@LocalDrivingLicenseApplicationID
+                             order by TestAppointmentID Desc";
+            SqlCommand cmd = new SqlCommand(Query, conn);
+            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalDrivingLicenseApplicationID);
+            try
+            {
+                conn.Open();
+                SqlDataReader Reader = cmd.ExecuteReader();
+                if (Reader.Read())
+                { 
+                    TestAppointmentID = (int)Reader["TestAppointmentID"];
+                    AppointmentDate = (DateTime)Reader["AppointmentDate"];
+                    PaidFees = (decimal)Reader["PaidFees"];
+                    CreatedByUserID = (int)Reader["CreatedByUserID"];
+                    IsLocked = (bool)Reader["IsLocked"];
+
+                    if (Reader["RetakeTestApplicationID"] != DBNull.Value)
+                    { RetakeTestApplicationID = (int)Reader["RetakeTestApplicationID"]; }
+
+                    else
+                    { RetakeTestApplicationID = -1; }
+
+                    IsFind = true;
+                }
+                Reader.Close();
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex); IsFind = false; }
+            finally { conn.Close(); }
+            return IsFind;
+        }
 
 
         public static int AddNewTestAppointments(int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
@@ -115,9 +154,7 @@ VALUES(
                 finally { con.Close(); }
             return ID;
         }
-
-      
-
+    
         public static bool DeleteByTestAppointmentID(int TestAppointmentID)
         {
 
@@ -142,7 +179,6 @@ VALUES(
             return IsDeleted;
 
         }
-
 
         public static bool UpdateTestAppointments(int TestAppointmentID, int TestTypeID, int LocalDrivingLicenseApplicationID, DateTime AppointmentDate, decimal PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
         {
@@ -179,92 +215,17 @@ where TestAppointmentID=@TestAppointmentID";
             return Updated;
         }
 
-        public static bool IsThereActiveAppointmentByLocalLicenseID(int LocalDrivingLicenseID, int TestTypeID)
-        {
-
-            bool Find =false;
-
-            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
-            string Query = @"select find=1 from TestAppointments 
-                             where LocalDrivingLicenseApplicationID=@LocalDrivingLicenseID and TestTypeID=@TestTypeID and IsLocked=0 ";
-            SqlCommand cmd = new SqlCommand(Query, conn);
-            cmd.Parameters.AddWithValue("@LocalDrivingLicenseID", LocalDrivingLicenseID);
-            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-
-            try
-            {
-                conn.Open();
-                object Reader = cmd.ExecuteScalar();
-                if (Reader != null)
-                {
-                    Find = (bool)Reader;
-                }
-            }
-            catch (Exception ex) { Console.WriteLine(ex); Find = false; }
-            finally { conn.Close(); }
-            return Find;
-        }
-
-        public static bool IsThereAppointmentByLocalLicenseID(int LocalDrivingLicenseID, int TestTypeID)
-        {
-
-            bool Find = false;
-
-            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
-            string Query = @"select find=1 from TestAppointments 
-                             where LocalDrivingLicenseApplicationID=@LocalDrivingLicenseID and TestTypeID=@TestTypeID ";
-            SqlCommand cmd = new SqlCommand(Query, conn);
-            cmd.Parameters.AddWithValue("@LocalDrivingLicenseID", LocalDrivingLicenseID);
-            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-
-            try
-            {
-                conn.Open();
-                object Reader = cmd.ExecuteScalar();
-                if (Reader != null)
-                {
-                    Find = (bool)Reader;
-                }
-            }
-            catch (Exception ex) { Console.WriteLine(ex); Find = false; }
-            finally { conn.Close(); }
-            return Find;
-        }
-        public static int CountTrails(int LocalDrivingLicenseID, int TestTypeID)
-        {
-
-            int Trails = 0;
-
-            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
-            string Query = @"Select  count(TestAppointmentID) from TestAppointments where LocalDrivingLicenseApplicationID=@LocalDrivingLicenseID and TestTypeID=@TestTypeID and IsLocked =1";
-            SqlCommand cmd = new SqlCommand(Query, conn);
-            cmd.Parameters.AddWithValue("@LocalDrivingLicenseID", LocalDrivingLicenseID);
-            cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-
-            try
-            {
-                conn.Open();
-                object Reader = cmd.ExecuteScalar();
-                if (Reader!=null && int.TryParse(Reader.ToString(),out int result))
-                {
-                    Trails = result;
-                }
-
-
-            }
-            catch (Exception ex) { Console.WriteLine(ex); Trails = -1; }
-            finally { conn.Close(); }
-            return Trails;
-        }
-
-        public static DataTable GetAllTestAppointmentsByLocalID(int LocalLicenseID, int TestTypeID)
+      
+       
+        public static DataTable GetApplicationTestAppointmentPerTestType(int LocalLicenseID, int TestTypeID)
 
         {
             DataTable Data = new DataTable();
 
             SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
             string Query = @"SELECT TestAppointmentID, AppointmentDate,PaidFees,IsLocked FROM TestAppointments
-    WHERE LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID and TestTypeID=@TestTypeID ";
+                             WHERE LocalDrivingLicenseApplicationID =@LocalDrivingLicenseApplicationID and TestTypeID=@TestTypeID
+                              order by TestAppointmentID desc";
             SqlCommand cmd = new SqlCommand(Query, conn);
             cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalLicenseID);
             cmd.Parameters.AddWithValue("@TestTypeID", TestTypeID);
@@ -284,6 +245,34 @@ where TestAppointmentID=@TestAppointmentID";
             catch (Exception ex) { Console.WriteLine(ex); }
             finally { conn.Close(); }
             return Data;
+        }
+
+        public static int GetTestID(int TestAppointmentID)
+
+        {
+            int TestID =-1;
+
+            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
+            string Query = @"select TestID from Tests where TestAppointmentID=@TestAppointmentID";
+            SqlCommand cmd = new SqlCommand(Query, conn);
+           
+            cmd.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+
+
+            try
+            {
+                conn.Open();
+                object Reader = cmd.ExecuteScalar();
+                if (Reader!=null && int.TryParse(Reader.ToString(), out int ID))
+                {
+                    TestID = ID;
+                }
+                
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+            finally { conn.Close(); }
+            return TestID;
         }
 
     }

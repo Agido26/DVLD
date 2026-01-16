@@ -1,4 +1,4 @@
-﻿using DVLD.Tests.VisionTest;
+﻿
 using DVLD_Business;
 using System;
 using System.Collections.Generic;
@@ -9,13 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_Business.clsTestTypes;
 
 namespace DVLD.Tests
 {
     public partial class frmTestAppointments : Form
     {
         int LocalID;
-        clsTests Test;
+        clsTestAppointment TestAppointment;
 
         clsTestTypes.enTestType TestTypeID;
         public frmTestAppointments(int LocalLicenseID, clsTestTypes.enTestType TestTypeID)
@@ -64,75 +65,66 @@ namespace DVLD.Tests
 
             ctrlLocalLicenseInfo1.LoadInfo(LocalID);
             
-            dgvAppointments.DataSource=clsTestAppointment.GetAllTestAppointmentsByLocalID(this.LocalID,(int)TestTypeID);
+            dgvAppointments.DataSource=clsTestAppointment.GetApplicationTestAppointmentPerTestType(this.LocalID,(int)TestTypeID);
             
             lblRecords.Text = dgvAppointments.RowCount.ToString();
+
         }
 
         
         private void btnAddTest_Click(object sender, EventArgs e)
         {
-            frmScheduleTest scheduleTest;
-            //check for appointments
-            if(clsTestAppointment.IsThereTestAppointmentIDByLocalLicenseID(LocalID,TestTypeID))
+
+            clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalLicenseID(LocalID);
+            if (localDrivingLicenseApplication.IsThereActiveTestAppointment((int)TestTypeID))
             {
-                //Check if He Has Active Appointment
-                if (clsTestAppointment.IsThereActiveTestAppointmentIDByLocalLicenseID(LocalID, TestTypeID))
-                {
-                    MessageBox.Show("You Can't Add Appointment because He already Has Active Appointment");
-                    return;
-                }
-                if (clsTests.TestResultByLocalDrivingLicenseID(LocalID, TestTypeID))
-                {
-                    MessageBox.Show("You Can't Add Appointment because He already Passed");
-                    return;
-                }
-                scheduleTest = new frmScheduleTest(LocalID, TestTypeID, clsApplicationType.enApplicationType.RetakeTest);
-                scheduleTest.ShowDialog();
+                MessageBox.Show("Person Already have an active appointment for this test, You cannot add new appointment", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else 
+
+
+
+            //---
+            clsTests LastTest = localDrivingLicenseApplication.GetLastTestPerTestType(TestTypeID);
+
+            if (LastTest == null)
             {
-                 scheduleTest = new frmScheduleTest(LocalID, TestTypeID);
-                scheduleTest.ShowDialog();
+                SchedualeTest frm1 = new SchedualeTest(LocalID, TestTypeID);
+                frm1.ShowDialog();
+                frmTestAppointment_Load(null, null);
+                return;
             }
-            dgvAppointments.DataSource = clsTestAppointment.GetAllTestAppointmentsByLocalID(LocalID, (int)TestTypeID);
+
+            //if person already passed the test s/he cannot retak it.
+            if (LastTest.TestResult == true)
+            {
+                MessageBox.Show("This person already passed this test before, you can only retake faild test", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            SchedualeTest frm2 = new SchedualeTest
+                (LastTest.TestAppointment.LocalDrivingLicenseID, TestTypeID);
+            frm2.ShowDialog();
+            frmTestAppointment_Load(null, null);
+            //---
 
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Test = clsTests.FindTestByTestAppointmentID((int)dgvAppointments.CurrentRow.Cells[0].Value);
-            frmScheduleTest EditTest;
-            if (Test != null)
+            if (int.Parse(lblRecords.Text) > 0)
             {
-                EditTest = new frmScheduleTest((int)dgvAppointments.CurrentRow.Cells[0].Value, (clsTestTypes.enTestType)TestTypeID, clsApplicationType.enApplicationType.RetakeTest);
+                int TestAppointment = (int)dgvAppointments.CurrentRow.Cells[0].Value;
+                SchedualeTest EditTest = new SchedualeTest(LocalID, TestTypeID, TestAppointment);
                 EditTest.ShowDialog();
             }
-            else
-            {
-                EditTest = new frmScheduleTest((int)dgvAppointments.CurrentRow.Cells[0].Value, (clsTestTypes.enTestType)TestTypeID, clsApplicationType.enApplicationType.NewLocalDrivingLicense);
-                EditTest.ShowDialog();
-            }
-            dgvAppointments.DataSource = clsTestAppointment.GetAllTestAppointmentsByLocalID(LocalID,(int)TestTypeID);
         }
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Test = clsTests.FindTestByTestAppointmentID((int)dgvAppointments.CurrentRow.Cells[0].Value);
-            if (Test != null)
-            {
-                if (Test.TestResult || !Test.TestResult)
-                {
-                    MessageBox.Show("You Already Take this test ");
-                    return;
-
-                }
-
-
-            }
-            frmTakeTest TakeTest = new frmTakeTest((int)dgvAppointments.CurrentRow.Cells[0].Value);
-            TakeTest.ShowDialog();
-            dgvAppointments.DataSource = clsTestAppointment.GetAllTestAppointmentsByLocalID(LocalID, (int)TestTypeID);
+           
         }
+
     }
+
 }

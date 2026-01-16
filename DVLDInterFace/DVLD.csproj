@@ -58,6 +58,12 @@
     <Compile Include="Applications\LocalDrivingLicense\frmLocalDrivingLicenseApplicationInfo.Designer.cs">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDataGridWithFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,23 +124,17 @@
     <Compile Include="MangeApplicationType\frmMangeApplicationTypes.Designer.cs">
       <DependentUpon>frmMangeApplicationTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\Controls\ctrlRetakeTest.cs">
+    <Compile Include="Tests\Controls\ctrlScheduleTets.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Tests\Controls\ctrlRetakeTest.Designer.cs">
-      <DependentUpon>ctrlRetakeTest.cs</DependentUpon>
+    <Compile Include="Tests\Controls\ctrlScheduleTets.Designer.cs">
+      <DependentUpon>ctrlScheduleTets.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\frmTakeTest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tests\frmTakeTest.Designer.cs">
       <DependentUpon>frmTakeTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\frmScheduleTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tests\frmScheduleTest.Designer.cs">
-      <DependentUpon>frmScheduleTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\frmTestAppointments.cs">
       <SubType>Form</SubType>
@@ -232,6 +232,9 @@
     <EmbeddedResource Include="Applications\LocalDrivingLicense\frmLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDataGridWithFilter.resx">
       <DependentUpon>frmDataGridWithFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -299,11 +302,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Tests\Controls\ctrlRetakeTest.resx">
-      <DependentUpon>ctrlRetakeTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmScheduleTest.resx">
-      <DependentUpon>frmScheduleTest.cs</DependentUpon>
+    <EmbeddedResource Include="Tests\Controls\ctrlScheduleTets.resx">
+      <DependentUpon>ctrlScheduleTets.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\frmTakeTest.resx">
       <DependentUpon>frmTakeTest.cs</DependentUpon>

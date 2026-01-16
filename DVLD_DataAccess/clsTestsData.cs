@@ -143,7 +143,6 @@ VALUES(
                 SqlDataReader Reader = cmd.ExecuteReader();
                 if (Reader.Read())
                 {
-                    TestID = (int)Reader["TestID"];
                     TestAppointmentID = (int)Reader["TestAppointmentID"];
                     TestResult = (bool)Reader["TestResult"];
 
@@ -278,6 +277,78 @@ VALUES(
             return IsPassed;
         }
 
+        public static bool UpdateTestResult(int TestID, int TestAppointmentID, bool TestResult, string Notes, int CreatedByUserID)
+        {
+            bool Updated = false;
+
+            SqlConnection con = new SqlConnection("Server=.;DataBase=DVLD; User Id=sa;Password=123456");
+            string query = @"Update Tests 
+                             set
+                             TestAppointmentID=@TestAppointmentID,TestResult=@TestResult,
+                             Notes=@Notes,CreatedByUserID=@CreatedByUserID
+                             where TestID=@TestID";
+            SqlCommand com = new SqlCommand(query, con);
+            com.Parameters.AddWithValue("@TestID", TestID);
+            com.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
+            com.Parameters.AddWithValue("@TestResult", TestResult);
+            if (Notes != "")
+            { com.Parameters.AddWithValue("@Notes", Notes); }
+            else { com.Parameters.AddWithValue("@Notes", DBNull.Value); }
+            com.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
+            try
+            {
+                con.Open();
+                int result = com.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    Updated = true;
+                }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex); Updated = false; }
+            finally { con.Close(); }
+            return Updated;
+        }
+
+        public static bool GetLastTestPerPersonAndLicenseClass(int AppID,int LicClassID,int TestType,ref int TestID, ref int TestAppointmentID, ref bool TestResult, ref string Notes, ref int CreatedByUserID)
+        {
+            bool IsFind = false;
+
+            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
+           
+            string Query = @" select top 1 T.TestID,T.TestAppointmentID,T.TestResult,T.Notes,T.CreatedByUserID from Tests T 
+                            left join TestAppointments TP on TP.TestAppointmentID=T.TestAppointmentID 
+                            left join LocalDrivingLicenseApplications L on L.LocalDrivingLicenseApplicationID=TP.LocalDrivingLicenseApplicationID 
+                             where L.ApplicationID=@AppID and L.LicenseClassID=@LicClassID and TP.TestTypeID=@TestTypeID";
+
+            SqlCommand cmd = new SqlCommand(Query, conn);
+
+            cmd.Parameters.AddWithValue("@AppID", AppID);
+            cmd.Parameters.AddWithValue("@LicClassID", LicClassID);
+            cmd.Parameters.AddWithValue("@TestTypeID", TestType);
+            try
+            {
+                conn.Open();
+                SqlDataReader Reader = cmd.ExecuteReader();
+                if (Reader.Read())
+                {
+                    TestID = (int)Reader["TestID"];
+                    TestAppointmentID = (int)Reader["TestAppointmentID"];
+                    TestResult = (bool)Reader["TestResult"];
+
+                    if (!string.IsNullOrEmpty((string)Reader["Notes"]))
+                    { Notes = (string)Reader["Notes"]; }
+                    else { Notes = ""; }
+                    CreatedByUserID = (int)Reader["CreatedByUserID"];
+                    IsFind = true;
+                }
+                Reader.Close();
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex); IsFind = false; }
+            finally { conn.Close(); }
+            return IsFind;
+        }
 
     }
 }

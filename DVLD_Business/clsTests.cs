@@ -13,6 +13,7 @@ namespace DVLD_Business
         enMode Mode;
         public int TestID {  get; set; }
         public int TestAppointmentID {  get; set; }
+        public clsTestAppointment TestAppointment {  get; set; }
        public bool TestResult {  get; set; }
         public string Notes {  get; set; }
         public int CreatedByUserID {  get; set; }
@@ -33,6 +34,7 @@ namespace DVLD_Business
         {
             this.TestID = testID;
             this.TestAppointmentID = TestAppointmentID;
+            TestAppointment=clsTestAppointment.FindTestAppointmentByID(TestAppointmentID);
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = UserID;
@@ -117,6 +119,17 @@ namespace DVLD_Business
         public static bool TestResultByLocalDrivingLicenseID(int LocalDrivingLiceseID, clsTestTypes.enTestType TestType)
         {
             return clsTestsData.TestResultByLocalDrivingLicenseID(LocalDrivingLiceseID, (int)TestType);
+        }
+        public static clsTests GetLastTestByAppIDAndLicenseClassID(int AppID,int LicClassID,clsTestTypes.enTestType TestType)
+        {
+            int testID = -1, UserID = -1, testAppointmentID=-1;
+            string Note = "";
+            bool result = false;
+            if (clsTestsData.GetLastTestPerPersonAndLicenseClass(AppID,LicClassID,(int)TestType, ref testID,ref testAppointmentID, ref result, ref Note, ref UserID))
+            {
+                return new clsTests(testID, testAppointmentID, result, Note, UserID);
+            }
+            return null;
         }
 
     }
