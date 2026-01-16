@@ -134,7 +134,7 @@ namespace DVLD_Business
             return false;
         }
     
-        private int _GetTestID()
+        public int _GetTestID()
         { return clsTestAppointmentsData.GetTestID(TestAppointmentID); }
         public static bool DeleteTestAppointmentByID(int TestAppointmentID)
         {

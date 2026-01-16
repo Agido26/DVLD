@@ -71,12 +71,10 @@ where TestID=@TestID";
             int ID = -1;
             SqlConnection con = new SqlConnection("Server=.;DataBase=DVLD; User Id=sa;Password=123456");
             string query = @"Insert Into Tests
-(                             
-TestAppointmentID, TestResult, Notes, CreatedByUserID)
-VALUES(
-
-@TestAppointmentID, @TestResult, @Notes, @CreatedByUserID)
- Select SCOPE_IDENTITY()";
+                              (TestAppointmentID, TestResult, Notes, CreatedByUserID)
+                              VALUES(@TestAppointmentID, @TestResult, @Notes, @CreatedByUserID)
+                              Update TestAppointments Set IsLocked=1 where TestAppointmentID=@TestAppointmentID 
+                               Select SCOPE_IDENTITY()";
             SqlCommand com = new SqlCommand(query, con);
             com.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
             com.Parameters.AddWithValue("@TestResult", TestResult);
@@ -84,7 +82,8 @@ VALUES(
             if (Notes!="")
             { com.Parameters.AddWithValue("@Notes", Notes); }
             else { com.Parameters.AddWithValue("@Notes", DBNull.Value); }
-                
+         
+
             try
             {
                 con.Open();
@@ -310,21 +309,28 @@ VALUES(
             return Updated;
         }
 
-        public static bool GetLastTestPerPersonAndLicenseClass(int AppID,int LicClassID,int TestType,ref int TestID, ref int TestAppointmentID, ref bool TestResult, ref string Notes, ref int CreatedByUserID)
+        public static bool GetLastTestPerPersonAndTestTypeAndLicenseClass(int PersonID,int LicClassID,int TestType,ref int TestID, ref int TestAppointmentID, ref bool TestResult, ref string Notes, ref int CreatedByUserID)
         {
             bool IsFind = false;
 
             SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
            
-            string Query = @" select top 1 T.TestID,T.TestAppointmentID,T.TestResult,T.Notes,T.CreatedByUserID from Tests T 
-                            left join TestAppointments TP on TP.TestAppointmentID=T.TestAppointmentID 
-                            left join LocalDrivingLicenseApplications L on L.LocalDrivingLicenseApplicationID=TP.LocalDrivingLicenseApplicationID 
-                             where L.ApplicationID=@AppID and L.LicenseClassID=@LicClassID and TP.TestTypeID=@TestTypeID";
+            string Query = @" SELECT  top 1 Tests.TestID, 
+                Tests.TestAppointmentID, Tests.TestResult, 
+			    Tests.Notes, Tests.CreatedByUserID, Applications.ApplicantPersonID
+                FROM            LocalDrivingLicenseApplications INNER JOIN
+                                         Tests INNER JOIN
+                                         TestAppointments ON Tests.TestAppointmentID = TestAppointments.TestAppointmentID ON LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = TestAppointments.LocalDrivingLicenseApplicationID INNER JOIN
+                                         Applications ON LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                WHERE        (Applications.ApplicantPersonID = @PersonID) 
+                        AND (LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID)
+                        AND ( TestAppointments.TestTypeID=@TestTypeID)
+                ORDER BY Tests.TestAppointmentID DESC";
 
             SqlCommand cmd = new SqlCommand(Query, conn);
 
-            cmd.Parameters.AddWithValue("@AppID", AppID);
-            cmd.Parameters.AddWithValue("@LicClassID", LicClassID);
+            cmd.Parameters.AddWithValue("@PersonID", PersonID);
+            cmd.Parameters.AddWithValue("@LicenseClassID", LicClassID);
             cmd.Parameters.AddWithValue("@TestTypeID", TestType);
             try
             {
@@ -349,6 +355,36 @@ VALUES(
             finally { conn.Close(); }
             return IsFind;
         }
+
+        public static int GetPassedTestCount(int LocalLiceseID)
+        {
+            int PassedTest = 0;
+
+            SqlConnection conn = new SqlConnection(" Server=.;DataBase=DVLD; User Id=sa;Password=123456 ");
+
+            string Query = @" Select PassedTestCount = count(TestTypeID) from Tests T 
+                              join TestAppointments TP on TP.TestAppointmentID=T.TestAppointmentID
+                              where TP.LocalDrivingLicenseApplicationID=@LocalDrivingLicenseApplicationID and TestResult=1";
+
+            SqlCommand cmd = new SqlCommand(Query, conn);
+            cmd.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LocalLiceseID);
+            
+            try
+            {
+                conn.Open();
+                object Reader = cmd.ExecuteScalar();
+                if (Reader!=null)
+                {
+                    PassedTest = (int)Reader;
+                }
+               
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+            finally { conn.Close(); }
+            return PassedTest;
+        }
+
 
     }
 }

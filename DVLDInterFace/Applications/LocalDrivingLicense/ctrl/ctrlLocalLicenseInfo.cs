@@ -34,7 +34,7 @@ namespace DVLD.LocalDrivingLicense.ctrl
             
             lblDLAppID.Text = LocalApplicationID.ToString();
             lblLicenseName.Text = _local.Licenseclass.className;
-                int PassTests = clsLocalDrivingLicenseApplication.PassedTests(LocalApplicationID);
+                int PassTests = clsLocalDrivingLicenseApplication.GetPassedTests(LocalApplicationID);
                 lblPassedTests.Text=PassTests.ToString()+"/3";
 
                 

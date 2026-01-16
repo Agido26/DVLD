@@ -16,12 +16,14 @@ namespace DVLD.Tests
     {
         int TestAppointmentID;
         clsTestAppointment TestAppointment;
-       
-        clsTests Test;
-        public frmTakeTest(int TestAppointmentID)
+        clsTestTypes.enTestType _TestTypeID= clsTestTypes.enTestType.VisionTest;
+        int _TestID=-1;
+        clsTests _Test;
+        public frmTakeTest(int TestAppointmentID,clsTestTypes.enTestType testTypesID)
         {
             InitializeComponent();
             this.TestAppointmentID= TestAppointmentID;
+            _TestTypeID= testTypesID;
          
         }
        
@@ -35,77 +37,44 @@ namespace DVLD.Tests
         {
             if (MessageBox.Show("Are you sure you want to save this Test", "Save Test", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                Test = new clsTests();
-                Test.TestAppointmentID = TestAppointmentID;
-                
-                Test.TestResult = rdPass.Checked;//return true if he pass or false if failed
-                Test.Notes = txtNote.Text;
-                Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
-                if (Test.Save())
-                {
-                    TestAppointment.IsLocked=true;
-                    if(TestAppointment.Save())
-                   { MessageBox.Show("Done"); }
+                _Test.TestAppointmentID = TestAppointmentID;
+
+                _Test.TestResult = rdPass.Checked;//return true if he pass or false if failed
+                _Test.Notes = txtNote.Text.Trim();
+                _Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
+                if (_Test.Save())
+                {  
+                    MessageBox.Show("Done"); 
                 }
                 else { MessageBox.Show("Faild"); }
             }
         }
-        private void MainLableText()
-        {
-            switch ((clsTestTypes.enTestType)TestAppointment.TestTypeID)
-            {
-                case clsTestTypes.enTestType.VisionTest:
-                    groupBox1.Text= "Vision Test";
-                    this.Name = "Vision Test";
-                    pictureBox1.Image = Properties.Resources.Vision_512;
-                    break;
 
-                case clsTestTypes.enTestType.WrittenTest:
-                    groupBox1.Text = "Written Test";
-                    this.Name = "Written Test";
-                    pictureBox1.Image = Properties.Resources.Written_Test_512;
-                    break;
-
-                case clsTestTypes.enTestType.StreetTest:
-                    groupBox1.Text = "Street Test";
-                    this.Name = "Street Test";
-                    pictureBox1.Image = Properties.Resources.driving_test_512;
-                    break;
-            }
-
-        }
         private void frmTakeTest_Load(object sender, EventArgs e)
         {
-           
-
-            TestAppointment = clsTestAppointment.FindTestAppointmentByID(this.TestAppointmentID);
-            MainLableText();
-            if (TestAppointment == null) { MessageBox.Show("Coudn't find TestAppoimnt"); }
-            lblDLAppID.Text = TestAppointment.LocalDrivingLicenseID.ToString();
-            lblDClass.Text = TestAppointment.LocalDrivingLicense.FullName;
-            lblName.Text = TestAppointment.LocalDrivingLicense.FullName;
-           
-            lblDate.Text = TestAppointment.AppointmentDate.ToString();
-            lblFees.Text = TestAppointment.PaidFees.ToString();
-
-            Test = clsTests.FindTestByTestAppointmentID(TestAppointmentID);
-            if (Test == null)
+            ctrlSchdeuledTest1.TestTypeID = _TestTypeID;
+            ctrlSchdeuledTest1.LoadData(TestAppointmentID);
+            if (ctrlSchdeuledTest1.TestAppointmentID == -1)
+                btnSave.Enabled = false;
+            else
+                btnSave.Enabled = true;
+            int _TestID = ctrlSchdeuledTest1.TestID;
+            if (_TestID != -1)
             {
-                lblTestID.Text = "Not Taken Yet";
-                return;
-            }
+                _Test = clsTests.FindTestByID(_TestID);
+                if (_Test.TestResult)
+                    rdPass.Checked = true;
+                else
+                    rdFail.Checked = true;
 
-            txtNote.Text = Test.Notes;
-          
-            if (Test.TestResult == true)
-            {
-                rdPass.Checked = true;
-                rdFail.Checked = false;
+                txtNote.Text = _Test.Notes;
+                label1.Visible = true;
+                rdPass.Enabled = false;
+                rdFail.Enabled = false;
+
             }
-            else {
-                rdPass.Checked = false;
-                rdFail.Checked = true;
-            }
+            else
+                _Test = new clsTests();
 
         }
     }

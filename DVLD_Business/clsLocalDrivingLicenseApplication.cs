@@ -131,11 +131,7 @@ namespace DVLD_Business
                 return clsApplication.GetActiveApplicationIDForLicenseClass(PersonID, LicenseClassID, TypeApplicatioonID) != -1;                    
         }
        
-        public static int PassedTests(int LocalLicesnseID)
-        {
-            return clsLocalDrivingLicenseData.PassedTestCount(LocalLicesnseID);  
-        }
-       
+        
         public int GetActiveLicenseID()
         {
             int LicID = clsLicensesData.GetActiveLicenseID(ApplicationID, LicenseClassID);
@@ -174,8 +170,15 @@ namespace DVLD_Business
         }
         public clsTests GetLastTestPerTestType(clsTestTypes.enTestType testType)
         {
-            return clsTests.GetLastTestByAppIDAndLicenseClassID(this.ApplicationID, this.LicenseClassID, testType);
+            return clsTests.GetLastTestByAppIDAndLicenseClassID(this.PersonID, this.LicenseClassID, testType);
         }
-    
+        public static int GetPassedTests(int LocalLicesnseID)
+        {
+            return clsLocalDrivingLicenseData.PassedTestCount(LocalLicesnseID);
+        }
+        public static bool PassedAllTests(int LocalLicesnseID)
+        {
+            return GetPassedTests(LocalLicesnseID) == 3;
+        }
     }
 }

@@ -16,8 +16,7 @@ namespace DVLD.Tests
     public partial class frmTestAppointments : Form
     {
         int LocalID;
-        clsTestAppointment TestAppointment;
-
+      
         clsTestTypes.enTestType TestTypeID;
         public frmTestAppointments(int LocalLicenseID, clsTestTypes.enTestType TestTypeID)
         {
@@ -89,7 +88,7 @@ namespace DVLD.Tests
 
             if (LastTest == null)
             {
-                SchedualeTest frm1 = new SchedualeTest(LocalID, TestTypeID);
+                frmSchedualeTest frm1 = new frmSchedualeTest(LocalID, TestTypeID);
                 frm1.ShowDialog();
                 frmTestAppointment_Load(null, null);
                 return;
@@ -102,7 +101,7 @@ namespace DVLD.Tests
                 return;
             }
 
-            SchedualeTest frm2 = new SchedualeTest
+            frmSchedualeTest frm2 = new frmSchedualeTest
                 (LastTest.TestAppointment.LocalDrivingLicenseID, TestTypeID);
             frm2.ShowDialog();
             frmTestAppointment_Load(null, null);
@@ -115,14 +114,23 @@ namespace DVLD.Tests
             if (int.Parse(lblRecords.Text) > 0)
             {
                 int TestAppointment = (int)dgvAppointments.CurrentRow.Cells[0].Value;
-                SchedualeTest EditTest = new SchedualeTest(LocalID, TestTypeID, TestAppointment);
+                frmSchedualeTest EditTest = new frmSchedualeTest(LocalID, TestTypeID, TestAppointment);
                 EditTest.ShowDialog();
+                dgvAppointments.DataSource = clsTestAppointment.GetApplicationTestAppointmentPerTestType(this.LocalID, (int)TestTypeID);
+                lblRecords.Text = dgvAppointments.RowCount.ToString();
             }
         }
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            if (int.Parse(lblRecords.Text) > 0)
+            {
+                int TestAppointment = (int)dgvAppointments.CurrentRow.Cells[0].Value;
+                frmTakeTest takeTest = new frmTakeTest(TestAppointment,TestTypeID);
+                takeTest.ShowDialog();
+                dgvAppointments.DataSource = clsTestAppointment.GetApplicationTestAppointmentPerTestType(this.LocalID, (int)TestTypeID);
+                lblRecords.Text = dgvAppointments.RowCount.ToString();
+            }
         }
 
     }

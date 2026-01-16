@@ -124,6 +124,12 @@
     <Compile Include="MangeApplicationType\frmMangeApplicationTypes.Designer.cs">
       <DependentUpon>frmMangeApplicationTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tests\Controls\ctrlSchdeuledTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tests\Controls\ctrlSchdeuledTest.Designer.cs">
+      <DependentUpon>ctrlSchdeuledTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\Controls\ctrlScheduleTets.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,11 +205,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\SchedualeTest.cs">
+    <Compile Include="Tests\frmSchedualeTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\SchedualeTest.Designer.cs">
-      <DependentUpon>SchedualeTest.cs</DependentUpon>
+    <Compile Include="Tests\frmSchedualeTest.Designer.cs">
+      <DependentUpon>frmSchedualeTest.cs</DependentUpon>
     </Compile>
     <Compile Include="User\frmAdd_UpdateUsers.cs">
       <SubType>Form</SubType>
@@ -302,6 +308,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tests\Controls\ctrlSchdeuledTest.resx">
+      <DependentUpon>ctrlSchdeuledTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tests\Controls\ctrlScheduleTets.resx">
       <DependentUpon>ctrlScheduleTets.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,8 +320,8 @@
     <EmbeddedResource Include="Tests\frmTestAppointments.resx">
       <DependentUpon>frmTestAppointments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\SchedualeTest.resx">
-      <DependentUpon>SchedualeTest.cs</DependentUpon>
+    <EmbeddedResource Include="Tests\frmSchedualeTest.resx">
+      <DependentUpon>frmSchedualeTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="User\frmAdd_UpdateUsers.resx">
       <DependentUpon>frmAdd_UpdateUsers.cs</DependentUpon>

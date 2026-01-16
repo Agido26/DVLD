@@ -13,12 +13,12 @@ using static DVLD_Business.clsTestTypes;
 
 namespace DVLD.Tests
 {
-    public partial class SchedualeTest : Form
+    public partial class frmSchedualeTest : Form
     {
         int _LocalLicneseID = -1;
         clsTestTypes.enTestType _TestType= clsTestTypes.enTestType.VisionTest;
         int _AppointmentID = -1;
-        public SchedualeTest(int LocalLicenseID, clsTestTypes.enTestType TestType,int AppoinmentID=-1)
+        public frmSchedualeTest(int LocalLicenseID, clsTestTypes.enTestType TestType,int AppoinmentID=-1)
         {
             InitializeComponent();
             _LocalLicneseID = LocalLicenseID;
