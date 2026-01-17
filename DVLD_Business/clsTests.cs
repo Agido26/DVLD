@@ -38,6 +38,7 @@ namespace DVLD_Business
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = UserID;
+            this.User=clsUser.FindByUserID(UserID);
             Mode = enMode.enUpdate;
         }
 
@@ -137,5 +138,6 @@ namespace DVLD_Business
             return clsTestsData.GetPassedTestCount(LocalLiceseID);
         }
       
+
     }
 }

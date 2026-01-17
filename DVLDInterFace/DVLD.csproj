@@ -58,6 +58,18 @@
     <Compile Include="Applications\LocalDrivingLicense\frmLocalDrivingLicenseApplicationInfo.Designer.cs">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Driver\ctrl\ctrlDriverLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Driver\ctrl\ctrlDriverLicenseInfo.Designer.cs">
+      <DependentUpon>ctrlDriverLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="License\LocalLicense\frmIssueLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="License\LocalLicense\frmIssueLicense.Designer.cs">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +249,12 @@
     </Compile>
     <EmbeddedResource Include="Applications\LocalDrivingLicense\frmLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>frmLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Driver\ctrl\ctrlDriverLicenseInfo.resx">
+      <DependentUpon>ctrlDriverLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="License\LocalLicense\frmIssueLicense.resx">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

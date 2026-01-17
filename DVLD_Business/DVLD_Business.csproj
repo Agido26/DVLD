@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsDrivers.cs" />
+    <Compile Include="clsInternationalLicense.cs" />
     <Compile Include="clsLicenses.cs" />
     <Compile Include="clsLocalDrivingLicenseApplication.cs" />
     <Compile Include="clsApplication.cs" />

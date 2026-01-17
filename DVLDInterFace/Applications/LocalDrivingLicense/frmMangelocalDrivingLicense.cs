@@ -1,4 +1,5 @@
 ﻿using DVLD.Applications.LocalDrivingLicense;
+using DVLD.Driver;
 using DVLD.Tests;
 using DVLD_Business;
 using System;
@@ -194,7 +195,7 @@ namespace DVLD.LocalDrivingLicense
 
             issueDrivingLicenseToolStripMenuItem.Enabled = (PassedTests == 3 && !IsLicensExist);
             editApplicationToolStripMenuItem.Enabled = (!IsLicensExist && (Local.ApplicationStatus != clsApplication.enStatus.enCancelled && Local.ApplicationStatus != clsApplication.enStatus.enCompleted));
-            deleteApplicationToolStripMenuItem.Enabled = (!IsLicensExist && PassedTests < 3);
+            deleteApplicationToolStripMenuItem.Enabled = (!IsLicensExist );
             cancelApplicationToolStripMenuItem.Enabled = !IsLicensExist && Local.ApplicationStatus != clsApplication.enStatus.enCancelled;
             sechduleTestToolStripMenuItem.Enabled = (!IsLicensExist && PassedTests < 3 && Local.ApplicationStatus != clsApplication.enStatus.enCancelled);
             sToolStripMenuItem.Enabled = IsLicensExist;
@@ -248,6 +249,12 @@ namespace DVLD.LocalDrivingLicense
             frmTestAppointments STest = new frmTestAppointments((int)dataGridView1.CurrentRow.Cells[0].Value, clsTestTypes.enTestType.StreetTest);
             STest.ShowDialog();
             LoadDataTable();
+        }
+
+        private void issueDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueLicense frmIssueLicense = new frmIssueLicense((int)dataGridView1.CurrentRow.Cells[0].Value);
+        frmIssueLicense.ShowDialog();
         }
     }
 }
