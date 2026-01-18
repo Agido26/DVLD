@@ -65,7 +65,7 @@ namespace DVLD.Driver
             if(LicneseID !=-1)
             {
                 MessageBox.Show($"Saved With License ID : {LicneseID}");
-                DataBack.Invoke(this, this.LicneseID);
+               
                 this.Close();
             }
             else { MessageBox.Show("License was not Issues"); }
