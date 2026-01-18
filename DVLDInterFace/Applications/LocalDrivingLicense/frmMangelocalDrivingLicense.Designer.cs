@@ -94,7 +94,7 @@
             this.toolStripMenuItem6,
             this.showPersonLicenseHistoryToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(226, 216);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(226, 238);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showApplicationDetailsToolStripMenuItem
@@ -217,6 +217,7 @@
             this.showPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.showPersonLicenseHistoryToolStripMenuItem.Tag = "1";
             this.showPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
+            this.showPersonLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicenseHistoryToolStripMenuItem_Click);
             // 
             // btnAddLocalLicense
             // 

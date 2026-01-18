@@ -1,5 +1,6 @@
 ﻿using DVLD.Applications.LocalDrivingLicense;
 using DVLD.Driver;
+using DVLD.License;
 using DVLD.Tests;
 using DVLD_Business;
 using System;
@@ -255,6 +256,13 @@ namespace DVLD.LocalDrivingLicense
         {
             frmDriverInfo driverInfo = new frmDriverInfo((int)dataGridView1.CurrentRow.Cells[0].Value);
             driverInfo.ShowDialog();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLicenseHistory frmLicenseHistory = new frmLicenseHistory((int)dataGridView1.CurrentRow.Cells[0].Value);
+       frmLicenseHistory.ShowDialog();
+        
         }
     }
 }

@@ -70,6 +70,12 @@
     <Compile Include="Driver\frmDriverInfo.Designer.cs">
       <DependentUpon>frmDriverInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="License\frmLicenseHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="License\frmLicenseHistory.Designer.cs">
+      <DependentUpon>frmLicenseHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="License\LocalLicense\frmIssueLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Driver\frmDriverInfo.resx">
       <DependentUpon>frmDriverInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="License\frmLicenseHistory.resx">
+      <DependentUpon>frmLicenseHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="License\LocalLicense\frmIssueLicense.resx">
       <DependentUpon>frmIssueLicense.cs</DependentUpon>

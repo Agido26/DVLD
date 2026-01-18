@@ -129,10 +129,20 @@ namespace DVLD_Business
 
         public static DataTable GetAllLicenses()
         {
-            return clsLicenses.GetAllLicenses();
+            return clsLicensesData.GetAllLicenses();
+
+        }
+        public DataTable GetDriver()
+        {
+            return clsLicensesData.GetDriverLicenses(this.DriverID);
 
         }
 
+        public DataTable GetIntrnationalDriver()
+        {
+            return clsInternationalLicenseData.GetDriverInternationalLicenses(this.DriverID);
+
+        }
         public bool Save()
         {
             switch (_Mode)
