@@ -39,25 +39,18 @@ namespace DVLD.License
                 return;
                 
             }
-            int LicenseID = Local.GetActiveLicenseID();
-            if (LicenseID == -1) {
-                MessageBox.Show("Something wnet wrong");
-                this.Close();
-                return;
-
-            }
-            clsLicenses License=clsLicenses.Find(LicenseID);
-            if (License == null)
-            {
-                MessageBox.Show("Something wnet wrong");
-                this.Close();
-                return;
-
-            }
-
             ctrlCardInfoWithFilter1.LoadPersonData(Local.PersonID);
-            dgvLocalDriver.DataSource = License.GetDriver();
-            dgvInternationalLicense.DataSource = License.GetIntrnationalDriver();
+            int LicenseID = Local.GetActiveLicenseID();   
+            clsLicenses License=clsLicenses.Find(LicenseID);
+            if (License != null)
+            {
+                
+                dgvLocalDriver.DataSource = License.GetDriver();
+                dgvInternationalLicense.DataSource = License.GetIntrnationalDriver();
+
+            }
+
+            
 
         }
     }
