@@ -109,11 +109,7 @@ namespace DVLD_Business
         {
             this.ApplicationStatus = enStatus.enCompleted;
             this.LastStatusDate = DateTime.Now;
-            if (clsApplicationData.UpdateStatus(ApplicationID, (byte)ApplicationStatus, DateTime.Now))
-            {
-                return this.Save();
-            }
-            else return false;
+            return clsApplicationData.UpdateStatus(ApplicationID, (byte)ApplicationStatus, DateTime.Now);    
         }
 
         public static bool DeleteApplication(int ApplicationID)

@@ -6,6 +6,7 @@
 # Ignore Connection string in Data Access project
 clsConnection.cs
 
+
 # User-specific files
 *.rsuser
 *.suo

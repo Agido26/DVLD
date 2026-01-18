@@ -1,6 +1,6 @@
 ﻿namespace DVLD.Tests
 {
-    partial class SchedualeTest
+    partial class frmSchedualeTest
     {
         /// <summary>
         /// Required designer variable.
@@ -38,6 +38,7 @@
             this.ctrlScheduleTets1.Name = "ctrlScheduleTets1";
             this.ctrlScheduleTets1.Size = new System.Drawing.Size(413, 576);
             this.ctrlScheduleTets1.TabIndex = 0;
+            this.ctrlScheduleTets1.TestTypeID = DVLD_Business.clsTestTypes.enTestType.VisionTest;
             // 
             // btnClose
             // 
@@ -49,14 +50,14 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // SchedualeTest
+            // frmSchedualeTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 628);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ctrlScheduleTets1);
-            this.Name = "SchedualeTest";
+            this.Name = "frmSchedualeTest";
             this.Text = "SchedualeTest";
             this.Load += new System.EventHandler(this.SchedualeTest_Load);
             this.ResumeLayout(false);

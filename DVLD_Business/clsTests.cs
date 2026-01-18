@@ -38,6 +38,7 @@ namespace DVLD_Business
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = UserID;
+            this.User=clsUser.FindByUserID(UserID);
             Mode = enMode.enUpdate;
         }
 
@@ -120,17 +121,23 @@ namespace DVLD_Business
         {
             return clsTestsData.TestResultByLocalDrivingLicenseID(LocalDrivingLiceseID, (int)TestType);
         }
-        public static clsTests GetLastTestByAppIDAndLicenseClassID(int AppID,int LicClassID,clsTestTypes.enTestType TestType)
+        public static clsTests GetLastTestByAppIDAndLicenseClassID(int PersonID,int LicClassID,clsTestTypes.enTestType TestType)
         {
             int testID = -1, UserID = -1, testAppointmentID=-1;
             string Note = "";
             bool result = false;
-            if (clsTestsData.GetLastTestPerPersonAndLicenseClass(AppID,LicClassID,(int)TestType, ref testID,ref testAppointmentID, ref result, ref Note, ref UserID))
+            if (clsTestsData.GetLastTestPerPersonAndTestTypeAndLicenseClass(PersonID,LicClassID,(int)TestType, ref testID,ref testAppointmentID, ref result, ref Note, ref UserID))
             {
                 return new clsTests(testID, testAppointmentID, result, Note, UserID);
             }
             return null;
         }
+
+        public static int CountPassedTest(int LocalLiceseID)
+        {
+            return clsTestsData.GetPassedTestCount(LocalLiceseID);
+        }
+      
 
     }
 }

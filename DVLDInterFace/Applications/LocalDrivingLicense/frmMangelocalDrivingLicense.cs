@@ -1,4 +1,5 @@
 ﻿using DVLD.Applications.LocalDrivingLicense;
+using DVLD.Driver;
 using DVLD.Tests;
 using DVLD_Business;
 using System;
@@ -16,6 +17,7 @@ namespace DVLD.LocalDrivingLicense
     public partial class frmMangelocalDrivingLicense : frmDataGridWithFilter
     {
         DataTable Data;
+        int _LicenseID;
         public frmMangelocalDrivingLicense()
         {
             InitializeComponent();
@@ -61,9 +63,7 @@ namespace DVLD.LocalDrivingLicense
             cbFilter.SelectedIndex = 0;
             cbStatus.SelectedIndex = 0;
             cbFilter_SelectedIndexChanged(null, null);
-        }
-
-      
+        }     
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -149,7 +149,6 @@ namespace DVLD.LocalDrivingLicense
             LocalLicnese.ShowDialog();
             LoadDataTable();
         }
-
         private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
           var Message=  MessageBox.Show("Are You Sure you want to cancel this application?", "Cancel Application", MessageBoxButtons.YesNo);
@@ -170,9 +169,6 @@ namespace DVLD.LocalDrivingLicense
             LocalLicnese.ShowDialog();
             LoadDataTable();
         }
-
-     
-
         private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLocalDrivingLicenseApplicationInfo Info = new frmLocalDrivingLicenseApplicationInfo((int)dataGridView1.CurrentRow.Cells[0].Value);
@@ -180,7 +176,6 @@ namespace DVLD.LocalDrivingLicense
             LoadDataTable();
         }
 
-      
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
 
@@ -194,7 +189,7 @@ namespace DVLD.LocalDrivingLicense
 
             issueDrivingLicenseToolStripMenuItem.Enabled = (PassedTests == 3 && !IsLicensExist);
             editApplicationToolStripMenuItem.Enabled = (!IsLicensExist && (Local.ApplicationStatus != clsApplication.enStatus.enCancelled && Local.ApplicationStatus != clsApplication.enStatus.enCompleted));
-            deleteApplicationToolStripMenuItem.Enabled = (!IsLicensExist && PassedTests < 3);
+            deleteApplicationToolStripMenuItem.Enabled = (!IsLicensExist );
             cancelApplicationToolStripMenuItem.Enabled = !IsLicensExist && Local.ApplicationStatus != clsApplication.enStatus.enCancelled;
             sechduleTestToolStripMenuItem.Enabled = (!IsLicensExist && PassedTests < 3 && Local.ApplicationStatus != clsApplication.enStatus.enCancelled);
             sToolStripMenuItem.Enabled = IsLicensExist;
@@ -228,7 +223,6 @@ namespace DVLD.LocalDrivingLicense
             LoadDataTable();
         }
 
-
         private void sechduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTestAppointments VTest = new frmTestAppointments((int)dataGridView1.CurrentRow.Cells[0].Value, clsTestTypes.enTestType.VisionTest);
@@ -248,6 +242,19 @@ namespace DVLD.LocalDrivingLicense
             frmTestAppointments STest = new frmTestAppointments((int)dataGridView1.CurrentRow.Cells[0].Value, clsTestTypes.enTestType.StreetTest);
             STest.ShowDialog();
             LoadDataTable();
+        }
+
+        private void issueDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueLicense frmIssueLicense = new frmIssueLicense((int)dataGridView1.CurrentRow.Cells[0].Value);
+           
+            frmIssueLicense.ShowDialog();
+        }
+
+        private void sToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDriverInfo driverInfo = new frmDriverInfo((int)dataGridView1.CurrentRow.Cells[0].Value);
+            driverInfo.ShowDialog();
         }
     }
 }

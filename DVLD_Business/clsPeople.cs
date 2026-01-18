@@ -23,6 +23,13 @@ namespace DVLD_Business
         public string Email {  get; set;}
         public string Phone {  get; set;}
         public byte Gendor { get; set; }
+        public string GendorText 
+        {
+            get 
+            {
+                return Gendor == 0 ? "Male" : "Female";
+            }
+        }
         public DateTime DateOfBirth  { get; set; }
         public string Image_Path {  get; set;}
         public int CountryID {  get; set;}

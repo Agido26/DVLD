@@ -191,6 +191,7 @@
             this.issueDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.issueDrivingLicenseToolStripMenuItem.Tag = "1";
             this.issueDrivingLicenseToolStripMenuItem.Text = "Issue Driving License";
+            this.issueDrivingLicenseToolStripMenuItem.Click += new System.EventHandler(this.issueDrivingLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem5
             // 
@@ -203,6 +204,7 @@
             this.sToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.sToolStripMenuItem.Tag = "1";
             this.sToolStripMenuItem.Text = "Show License";
+            this.sToolStripMenuItem.Click += new System.EventHandler(this.sToolStripMenuItem_Click);
             // 
             // toolStripMenuItem6
             // 
