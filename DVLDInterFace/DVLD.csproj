@@ -214,6 +214,11 @@
     <Compile Include="MangeApplicationType\frmMangeApplicationTypes.Designer.cs">
       <DependentUpon>frmMangeApplicationTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ReplaceLicense\frmReplaceLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -441,14 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ReplaceLicense\frmReplaceLicense.resx">
       <DependentUpon>frmReplaceLicense.cs</DependentUpon>
     </EmbeddedResource>
@@ -569,6 +569,14 @@
     <None Include="Icons\Driver Main.png" />
     <None Include="Icons\Detain 64.png" />
     <None Include="Icons\Release Detained License 64.png" />
+    <None Include="Icons\GovermentLogo.jpg" />
+    <None Include="Icons\LogOut.jpg" />
+    <None Include="Icons\Account Setting.png" />
+    <None Include="Icons\account_settings 64.png" />
+    <None Include="Icons\icons8-account-male-50.png" />
+    <None Include="Icons\driver.png" />
+    <None Include="Icons\User.png" />
+    <None Include="Icons\Settings.png" />
     <Content Include="Login\RemberMe.txt" />
   </ItemGroup>
   <ItemGroup>

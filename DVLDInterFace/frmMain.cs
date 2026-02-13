@@ -45,8 +45,7 @@ namespace DVLD
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _LoginScreen.Show();
-            this.Close();
+            
         }
 
         private void tsmUsers_Click(object sender, EventArgs e)
@@ -150,6 +149,17 @@ namespace DVLD
         {
             frmManageDetainLicenseApplication ManageDetain = new frmManageDetainLicenseApplication();
             ManageDetain.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _LoginScreen.Show();
+            this.Close();
+        }
+
+        private void btnAccountSetting_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
