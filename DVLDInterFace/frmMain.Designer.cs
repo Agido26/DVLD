@@ -131,6 +131,7 @@
             this.internationalTestToolStripMenuItem.Name = "internationalTestToolStripMenuItem";
             this.internationalTestToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.internationalTestToolStripMenuItem.Text = "International Test";
+            this.internationalTestToolStripMenuItem.Click += new System.EventHandler(this.internationalTestToolStripMenuItem_Click);
             // 
             // renewDrivingLicenseToolStripMenuItem
             // 
@@ -138,6 +139,7 @@
             this.renewDrivingLicenseToolStripMenuItem.Name = "renewDrivingLicenseToolStripMenuItem";
             this.renewDrivingLicenseToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.renewDrivingLicenseToolStripMenuItem.Text = "Renew Driving License";
+            this.renewDrivingLicenseToolStripMenuItem.Click += new System.EventHandler(this.renewDrivingLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -150,6 +152,7 @@
             this.replacementForLostOrDamgedLicenseToolStripMenuItem.Name = "replacementForLostOrDamgedLicenseToolStripMenuItem";
             this.replacementForLostOrDamgedLicenseToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.replacementForLostOrDamgedLicenseToolStripMenuItem.Text = "Replacement for Lost or Damged License";
+            this.replacementForLostOrDamgedLicenseToolStripMenuItem.Click += new System.EventHandler(this.replacementForLostOrDamgedLicenseToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -169,6 +172,7 @@
             this.retakeTestToolStripMenuItem.Name = "retakeTestToolStripMenuItem";
             this.retakeTestToolStripMenuItem.Size = new System.Drawing.Size(317, 22);
             this.retakeTestToolStripMenuItem.Text = "Retake Test";
+            this.retakeTestToolStripMenuItem.Click += new System.EventHandler(this.retakeTestToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -197,6 +201,7 @@
             this.internationToolStripMenuItem.Name = "internationToolStripMenuItem";
             this.internationToolStripMenuItem.Size = new System.Drawing.Size(314, 22);
             this.internationToolStripMenuItem.Text = "International Driving License Applications";
+            this.internationToolStripMenuItem.Click += new System.EventHandler(this.internationToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -219,18 +224,21 @@
             this.manageDetainedLicenseToolStripMenuItem.Name = "manageDetainedLicenseToolStripMenuItem";
             this.manageDetainedLicenseToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.manageDetainedLicenseToolStripMenuItem.Text = "Manage Detained License";
+            this.manageDetainedLicenseToolStripMenuItem.Click += new System.EventHandler(this.manageDetainedLicenseToolStripMenuItem_Click);
             // 
             // detainedLicenseToolStripMenuItem
             // 
             this.detainedLicenseToolStripMenuItem.Name = "detainedLicenseToolStripMenuItem";
             this.detainedLicenseToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.detainedLicenseToolStripMenuItem.Text = "Detained License";
+            this.detainedLicenseToolStripMenuItem.Click += new System.EventHandler(this.detainedLicenseToolStripMenuItem_Click);
             // 
             // releaceToolStripMenuItem
             // 
             this.releaceToolStripMenuItem.Name = "releaceToolStripMenuItem";
             this.releaceToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.releaceToolStripMenuItem.Text = "Release Detained License";
+            this.releaceToolStripMenuItem.Click += new System.EventHandler(this.releaceToolStripMenuItem_Click);
             // 
             // manageApplicationTypesToolStripMenuItem
             // 
@@ -260,6 +268,7 @@
             this.tsmDriver.Name = "tsmDriver";
             this.tsmDriver.Size = new System.Drawing.Size(69, 25);
             this.tsmDriver.Text = "Driver";
+            this.tsmDriver.Click += new System.EventHandler(this.tsmDriver_Click);
             // 
             // tsmUsers
             // 
@@ -327,7 +336,6 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

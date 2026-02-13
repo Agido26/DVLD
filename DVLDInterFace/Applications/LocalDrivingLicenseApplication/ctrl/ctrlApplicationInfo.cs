@@ -21,7 +21,7 @@ namespace DVLD.LocalDrivingLicense.ctrl
         }
         public bool LoadInfo(int ApplicationID)
         {
-             App = clsApplication.FindApplicationByID(ApplicationID);
+             App = clsApplication.FindBase(ApplicationID);
             if (App != null)
             {
                 lblID.Text=App.ApplicationID.ToString();

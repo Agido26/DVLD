@@ -125,6 +125,7 @@ namespace DVLD.Tests
         {
             if (int.Parse(lblRecords.Text) > 0)
             {
+
                 int TestAppointment = (int)dgvAppointments.CurrentRow.Cells[0].Value;
                 frmTakeTest takeTest = new frmTakeTest(TestAppointment,TestTypeID);
                 takeTest.ShowDialog();

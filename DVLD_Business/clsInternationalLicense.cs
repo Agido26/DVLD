@@ -10,17 +10,18 @@ namespace DVLD_Buisness
     public class clsInternationalLicense:clsApplication
     {
 
-        public enum enMode { AddNew = 0, Update = 1 };
+        public enum enMode { AddNew = 1, Update = 2 };
         public enMode Mode = enMode.AddNew;
 
-        public clsDrivers DriverInfo;
+        public clsDriver DriverInfo;
         public int InternationalLicenseID { set; get; }  
         public int DriverID { set; get; }
         public int IssuedUsingLocalLicenseID { set; get; }   
         public DateTime IssueDate { set; get; }
         public DateTime ExpirationDate { set; get; }    
         public bool IsActive { set; get; }
-       
+ 
+     
 
         public clsInternationalLicense()
 
@@ -68,7 +69,7 @@ namespace DVLD_Buisness
             this.IsActive = IsActive;
             this.UserID = CreatedByUserID;
 
-            this.DriverInfo = clsDrivers.Find(this.DriverID);
+            this.DriverInfo = clsDriver.Find(this.DriverID);
 
             Mode = enMode.Update;
         }
@@ -108,7 +109,7 @@ namespace DVLD_Buisness
             ref IssueDate, ref ExpirationDate, ref IsActive, ref CreatedByUserID))
             {
                 //now we find the base application
-                clsApplication Application = clsApplication.FindApplicationByID(ApplicationID);
+                clsApplication Application = clsApplication.FindBase(ApplicationID);
 
 
                 return new clsInternationalLicense(Application.ApplicationID,

@@ -18,7 +18,7 @@ namespace DVLD.LocalDrivingLicense
     public partial class frmMangelocalDrivingLicense : frmDataGridWithFilter
     {
         DataTable Data;
-        int _LicenseID;
+        
         public frmMangelocalDrivingLicense()
         {
             InitializeComponent();
@@ -250,11 +250,19 @@ namespace DVLD.LocalDrivingLicense
             frmIssueLicense frmIssueLicense = new frmIssueLicense((int)dataGridView1.CurrentRow.Cells[0].Value);
            
             frmIssueLicense.ShowDialog();
+            LoadDataTable();
         }
 
         private void sToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmDriverInfo driverInfo = new frmDriverInfo((int)dataGridView1.CurrentRow.Cells[0].Value);
+            clsLocalDrivingLicenseApplication local = clsLocalDrivingLicenseApplication.FindByLocalLicenseID((int)dataGridView1.CurrentRow.Cells[0].Value);
+            if(local==null)
+            {
+                MessageBox.Show("Something went wrong");
+                return;
+            }
+            int licensesID = clsLicenses.GetActiveLicense(local.PersonID,local.LicenseClassID);
+            frmDriverLicenseInfo driverInfo = new frmDriverLicenseInfo(licensesID);
             driverInfo.ShowDialog();
         }
 

@@ -15,9 +15,8 @@ namespace DVLD.Tests
     public partial class frmTakeTest : Form
     {
         int TestAppointmentID;
-        clsTestAppointment TestAppointment;
         clsTestTypes.enTestType _TestTypeID= clsTestTypes.enTestType.VisionTest;
-        int _TestID=-1;
+       
         clsTests _Test;
         public frmTakeTest(int TestAppointmentID,clsTestTypes.enTestType testTypesID)
         {
@@ -35,6 +34,10 @@ namespace DVLD.Tests
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if(clsTests.FindTestByTestAppointmentID(TestAppointmentID)!=null)
+            {
+                MessageBox.Show("Can't save because it's already exsist");
+            }
             if (MessageBox.Show("Are you sure you want to save this Test", "Save Test", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 _Test.TestAppointmentID = TestAppointmentID;
@@ -44,9 +47,12 @@ namespace DVLD.Tests
                 _Test.CreatedByUserID = clsGlobal.CurrentUser.UserID;
                 if (_Test.Save())
                 {  
-                    MessageBox.Show("Done"); 
+                    MessageBox.Show("Done");
+                    ctrlSchdeuledTest1.TestID = _Test.TestID;
+                   
                 }
                 else { MessageBox.Show("Faild"); }
+                this.Close();
             }
         }
 
@@ -68,10 +74,10 @@ namespace DVLD.Tests
                     rdFail.Checked = true;
 
                 txtNote.Text = _Test.Notes;
-                label1.Visible = true;
+                lblwarning.Visible = true;
                 rdPass.Enabled = false;
                 rdFail.Enabled = false;
-
+                btnSave.Enabled = false;
             }
             else
                 _Test = new clsTests();

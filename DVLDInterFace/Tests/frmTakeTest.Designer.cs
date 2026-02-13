@@ -35,6 +35,7 @@
             this.txtNote = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
+            this.lblwarning = new System.Windows.Forms.Label();
             this.ctrlSchdeuledTest1 = new DVLD.Tests.Controls.ctrlSchdeuledTest();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -109,12 +110,25 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // lblwarning
+            // 
+            this.lblwarning.AutoSize = true;
+            this.lblwarning.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblwarning.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblwarning.Location = new System.Drawing.Point(181, 463);
+            this.lblwarning.Name = "lblwarning";
+            this.lblwarning.Size = new System.Drawing.Size(179, 15);
+            this.lblwarning.TabIndex = 26;
+            this.lblwarning.Text = "You can\'t change the test result";
+            this.lblwarning.Visible = false;
+            // 
             // ctrlSchdeuledTest1
             // 
             this.ctrlSchdeuledTest1.Location = new System.Drawing.Point(23, 12);
             this.ctrlSchdeuledTest1.Name = "ctrlSchdeuledTest1";
             this.ctrlSchdeuledTest1.Size = new System.Drawing.Size(323, 446);
             this.ctrlSchdeuledTest1.TabIndex = 25;
+            this.ctrlSchdeuledTest1.TestID = -1;
             // 
             // label1
             // 
@@ -133,7 +147,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 603);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblwarning);
             this.Controls.Add(this.ctrlSchdeuledTest1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
@@ -159,6 +173,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private Controls.ctrlSchdeuledTest ctrlSchdeuledTest1;
+        private System.Windows.Forms.Label lblwarning;
         private System.Windows.Forms.Label label1;
     }
 }

@@ -80,7 +80,7 @@ namespace DVLD_Business
             }
             return false;
         }
-        public static clsApplication FindApplicationByID(int ApplicationID)
+        public static clsApplication FindBase(int ApplicationID)
         {
             int PersonID = -1, UserID = -1,TypeID=-1;
             decimal PaidFees = -1;

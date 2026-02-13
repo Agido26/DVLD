@@ -10,20 +10,25 @@ using System.Windows.Forms;
 
 namespace DVLD.Driver
 {
-    public partial class frmDriverInfo : Form
+    public partial class frmDriverLicenseInfo : Form
     {
-        int _LocalLicenseID;
-        public frmDriverInfo(int LocalLicenseID)
+        int _LicenseID;
+        public frmDriverLicenseInfo(int LicenseID)
         {
             InitializeComponent();
-            _LocalLicenseID = LocalLicenseID;
+            _LicenseID = LicenseID;
         }
 
       
 
         private void frmDriverInfo_Load(object sender, EventArgs e)
         {
-            ctrlDriverLicenseInfo1.LoadData(_LocalLicenseID); 
+            ctrlDriverLicenseInfo1.LoadData(_LicenseID); 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

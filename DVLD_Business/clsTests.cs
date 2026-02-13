@@ -70,8 +70,8 @@ namespace DVLD_Business
         private bool _AddNewTest()
         {
 
-            int NewTestID = clsTestsData.AddNewTest(TestAppointmentID, TestResult, Notes, CreatedByUserID);
-            return NewTestID != -1;
+            this.TestID = clsTestsData.AddNewTest(TestAppointmentID, TestResult, Notes, CreatedByUserID);
+            return TestID != -1;
         }
         private bool _UpdateTest()
         {

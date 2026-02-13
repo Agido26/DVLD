@@ -76,6 +76,10 @@ namespace DVLD.Tests.Controls
             {
                 return _TestID;
             }
+            set {
+                _TestID = value;
+                lblTestID.Text = _TestID.ToString(); 
+            }
         }
 
         private int _TestAppointmentID = -1;

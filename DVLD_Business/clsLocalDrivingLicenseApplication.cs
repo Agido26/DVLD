@@ -64,7 +64,7 @@ namespace DVLD_Business
             bool isfind = clsLocalDrivingLicenseData.FindByApplicationID(ApplicationID, ref LocalApplicationID, ref LicenseID);
             if (isfind)
             {
-                clsApplication App = clsApplication.FindApplicationByID(LocalApplicationID);
+                clsApplication App = clsApplication.FindBase(ApplicationID);
                 return new clsLocalDrivingLicenseApplication(LocalApplicationID, LicenseID, ApplicationID, App.PersonID, App.UserID, App.ApplicationStatus, App.LastStatusDate, App.ApplicationDate, App.PaidFees, App.ApplicationTypeID);
             }
             return null;
@@ -78,7 +78,7 @@ namespace DVLD_Business
 
             if (isfind)
             {
-                clsApplication App = clsApplication.FindApplicationByID(ApplicationID);
+                clsApplication App = clsApplication.FindBase(ApplicationID);
                 return new clsLocalDrivingLicenseApplication(Id,LicenseID,ApplicationID,App.PersonID,App.UserID,App.ApplicationStatus,App.LastStatusDate,App.ApplicationDate,App.PaidFees,App.ApplicationTypeID);
             }
             return null;
@@ -192,11 +192,11 @@ namespace DVLD_Business
         public int IssueLicenseForFirstTime(string Note,int CreatedByUserID)
         {
             int DriverID = -1;
-            clsDrivers Driver = clsDrivers.FindDriverByPersonID(this.PersonID);
+            clsDriver Driver = clsDriver.FindDriverByPersonID(this.PersonID);
 
             if (Driver == null)
             {
-                Driver = new clsDrivers();
+                Driver = new clsDriver();
 
                 Driver.PersonID = this.PersonID;
 
@@ -207,7 +207,7 @@ namespace DVLD_Business
                 }
                 else { return -1; }
             }
-            else return Driver.DriverID;
+            else DriverID = Driver.DriverID;
 
             clsLicenses License=new clsLicenses();
             License.ApplicationID= this.ApplicationID;

@@ -1,6 +1,6 @@
 ﻿namespace DVLD.Driver
 {
-    partial class frmDriverInfo
+    partial class frmDriverLicenseInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ctrlDriverLicenseInfo1 = new DVLD.Driver.ctrl.ctrlDriverLicenseInfo();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,15 +63,26 @@
             this.ctrlDriverLicenseInfo1.Size = new System.Drawing.Size(640, 325);
             this.ctrlDriverLicenseInfo1.TabIndex = 0;
             // 
-            // frmDriverInfo
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(550, 452);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(61, 39);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // frmDriverLicenseInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(661, 470);
+            this.ClientSize = new System.Drawing.Size(661, 503);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ctrlDriverLicenseInfo1);
-            this.Name = "frmDriverInfo";
+            this.Name = "frmDriverLicenseInfo";
             this.Text = "frmDriverInfo";
             this.Load += new System.EventHandler(this.frmDriverInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -84,5 +96,6 @@
         private ctrl.ctrlDriverLicenseInfo ctrlDriverLicenseInfo1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnClose;
     }
 }

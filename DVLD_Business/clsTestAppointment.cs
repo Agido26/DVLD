@@ -48,7 +48,7 @@ namespace DVLD_Business
             this.PaidFees= PaidFees;
             this.CreatByUserID = CreatByUserID;
             this.ReTakeTestApplicationID = ReTakeAppID;
-            this.RetakeAppInfo = clsApplication.FindApplicationByID(ReTakeAppID);
+            this.RetakeAppInfo = clsApplication.FindBase(ReTakeAppID);
             this.IsLocked= IsLocked;
             Mode=enMode.enUpdate;
         }

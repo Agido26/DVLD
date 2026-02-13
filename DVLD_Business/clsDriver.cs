@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_Business
 {
-    public class clsDrivers
+    public class clsDriver
     {
         enum enMode { Add=1, Update=2}
         enMode Mode= enMode.Add;
@@ -19,7 +19,7 @@ namespace DVLD_Business
         public clsUser CreatedUserInfo { get; set; }
         public DateTime CreateDate { get; set; }
         
-        public clsDrivers()
+        public clsDriver()
         {
             DriverID = -1;
             PersonID = -1;
@@ -28,7 +28,7 @@ namespace DVLD_Business
             Mode= enMode.Add;
         }
       
-        private clsDrivers(int DriverID, int PersonID, int CreatedByUserID, DateTime CreateDate)
+        private clsDriver(int DriverID, int PersonID, int CreatedByUserID, DateTime CreateDate)
         {
             this.DriverID = DriverID;
             this.PersonID = PersonID;
@@ -43,26 +43,26 @@ namespace DVLD_Business
         {
             return clsDriversData.GetAllDrivers();
         }
-        public static clsDrivers Find(int DriverID)
+        public static clsDriver Find(int DriverID)
         {
             int PersonID=-1,CreatedByUserID=-1;
             DateTime CreateDate=DateTime.Now;
 
             if(clsDriversData.FindDrivers(DriverID,ref PersonID,ref CreatedByUserID,ref CreateDate))
             {
-                return new clsDrivers(DriverID, PersonID, CreatedByUserID, CreateDate);
+                return new clsDriver(DriverID, PersonID, CreatedByUserID, CreateDate);
             }
             return null;
         }
 
-        public static clsDrivers FindDriverByPersonID(int PersonID)
+        public static clsDriver FindDriverByPersonID(int PersonID)
         {
             int DriverID = -1, CreatedByUserID = -1;
             DateTime CreateDate = DateTime.Now;
 
             if (clsDriversData.FindDriversByPersonID(PersonID, ref DriverID, ref CreatedByUserID, ref CreateDate))
             {
-                return new clsDrivers(DriverID, PersonID, CreatedByUserID, CreateDate);
+                return new clsDriver(DriverID, PersonID, CreatedByUserID, CreateDate);
             }
             return null;
         }

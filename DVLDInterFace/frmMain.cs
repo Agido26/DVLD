@@ -1,8 +1,15 @@
-﻿using DVLD.LocalDrivingLicense;
+﻿using DVLD.Applications.InternationalLicense;
+using DVLD.Applications.IntrnationalLicenseApplication;
+using DVLD.Applications.ReleaseDetainLicenseApplication;
+using DVLD.Applications.RenewLicenseApplication;
+using DVLD.License.DetainLicense;
+using DVLD.License.Driver;
+using DVLD.LocalDrivingLicense;
 using DVLD.Login;
 using DVLD.ManageTestTypes;
 using DVLD.MangeApplicationType;
 using DVLD.People;
+using DVLD.ReplaceLicense;
 using DVLD.User;
 using System;
 using System.Collections.Generic;
@@ -89,6 +96,60 @@ namespace DVLD
         {
             frmMangelocalDrivingLicense MangeLocalLincese = new frmMangelocalDrivingLicense();
             MangeLocalLincese.ShowDialog();
+        }
+
+        private void internationalTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmNewInternationalLicense internationalLicense = new frmNewInternationalLicense();
+            internationalLicense.ShowDialog();
+        }
+
+        private void internationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageInternationalLicenseApplications manageInternationalLicenseApplications = new frmManageInternationalLicenseApplications();
+            manageInternationalLicenseApplications.ShowDialog();
+        }
+
+        private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLicenseApplication renewLicenseApplication = new frmRenewLicenseApplication();
+            renewLicenseApplication.ShowDialog();
+        }
+
+        private void tsmDriver_Click(object sender, EventArgs e)
+        {
+            frmListDriver ListDriver = new frmListDriver();
+            ListDriver.ShowDialog();
+        }
+
+        private void replacementForLostOrDamgedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReplaceLicense replaceLicense = new frmReplaceLicense();
+            replaceLicense.ShowDialog();
+        }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMangelocalDrivingLicense ManageLocalLicense=new frmMangelocalDrivingLicense();
+            ManageLocalLicense.ShowDialog();
+        }
+
+        private void detainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense Detain = new frmDetainLicense();
+            Detain.ShowDialog();
+        }
+
+        private void releaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicenes Release = new frmReleaseDetainedLicenes();
+            Release.ShowDialog();
+        }
+
+        private void manageDetainedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageDetainLicenseApplication ManageDetain = new frmManageDetainLicenseApplication();
+            ManageDetain.ShowDialog();
         }
     }
 }

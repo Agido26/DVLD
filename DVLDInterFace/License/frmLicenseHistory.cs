@@ -13,45 +13,34 @@ namespace DVLD.License
 {
     public partial class frmLicenseHistory : Form
     {
-        int _LocalLicenseID;
-        public frmLicenseHistory(int localLicenseID)
+        int PersonID;
+        public frmLicenseHistory(int PersonID)
         {
             InitializeComponent();
-            _LocalLicenseID = localLicenseID;
+            this.PersonID = PersonID;
         }
-
-        void fitDataGridView()
+        public frmLicenseHistory()
         {
-            
-
-
-
+            InitializeComponent();
         }
+
+
 
         private void frmLicenseHistory_Load(object sender, EventArgs e)
         {
-
-            clsLocalDrivingLicenseApplication Local = clsLocalDrivingLicenseApplication.FindByLocalLicenseID(_LocalLicenseID);
-            if (Local == null)
+            if(PersonID==-1)
             {
-                MessageBox.Show("Something wnet wrong");
-                this.Close();
+                MessageBox.Show("No person found");
                 return;
-                
             }
-            ctrlCardInfoWithFilter1.LoadPersonData(Local.PersonID);
-            int LicenseID = Local.GetActiveLicenseID();   
-            clsLicenses License=clsLicenses.Find(LicenseID);
-            if (License != null)
-            {
-                
-                dgvLocalDriver.DataSource = License.GetDriver();
-                dgvInternationalLicense.DataSource = License.GetIntrnationalDriver();
+           
+                ctrlCardInfoWithFilter1.LoadPersonData(PersonID);
+                ctrlCardInfoWithFilter1.FilterEnable = false;
 
-            }
-
-            
-
+                ctrlCardInfoWithFilter1.LoadPersonData(PersonID);
+                ctrlDriverLicenses1.LoadInfoByPersonID(PersonID);
+              
+           
         }
     }
 }

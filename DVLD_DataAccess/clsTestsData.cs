@@ -145,7 +145,7 @@ where TestID=@TestID";
                     TestAppointmentID = (int)Reader["TestAppointmentID"];
                     TestResult = (bool)Reader["TestResult"];
 
-                    if(!string.IsNullOrEmpty((string)Reader["Notes"]))
+                    if( Reader["Notes"]!=DBNull.Value)
                    { Notes = (string)Reader["Notes"]; }
                     else { Notes = ""; }
                         CreatedByUserID = (int)Reader["CreatedByUserID"];
@@ -177,7 +177,7 @@ where TestID=@TestID";
                 {
                     TestID = (int)Reader["TestID"];
                     TestResult = (bool)Reader["TestResult"];
-                    if (!string.IsNullOrEmpty((string)Reader["Notes"]))
+                    if (Reader["Notes"] != DBNull.Value)
                     { Notes = (string)Reader["Notes"]; }
                     else { Notes = ""; }
                     CreatedByUserID = (int)Reader["CreatedByUserID"];
